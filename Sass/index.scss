@@ -1,0 +1,543 @@
+// ======================================= Main Rules =============================================
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap');
+@import 'media';
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+ul { list-style: none;}
+a { text-decoration: none;}
+// ================================= Variables =================================
+$colorWhite: #fff;
+$mainTransition: .4s ease-in-out;
+$colorLinks: #9B5C43;
+$colorP: #808397;
+$colorSecond: #24554A;
+$lightGreen: #90D4C6;
+// =============================== Scroll-Bar ==================================
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #9B8575;
+    border-radius: 10px;
+}
+// ========================= Classes Used By JS ================================
+.scroll-icon {
+    background-color: #9B8575;
+    color: $colorWhite;
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    line-height: 30px;
+    text-align: center;
+    position: fixed;
+    z-index: 100;
+    right: -2rem;
+    bottom: .5rem;
+    cursor: pointer;
+    transition: $mainTransition;
+    user-select: none;
+    i {
+        font-size: 1.2rem;
+    }
+}
+
+// ==================================== FrameWork =======================================
+
+.para-box { 
+    font-weight: bold; 
+    line-height: 1.6;
+    text-align: center;
+    margin-top: 1.2rem;
+}
+.title-box, .para-box {
+    color: $colorSecond !important;
+}
+.container {
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+}
+
+@mixin grid ($col, $row) {
+    display: grid;
+    grid-template-columns: $col;
+    grid-template-rows: $row;
+}
+
+@mixin links ($sizeFont, $bold) {
+    color: $colorWhite;
+    font-size: $sizeFont;
+    letter-spacing: .2rem;
+    text-transform: capitalize;
+    font-weight: $bold;
+}
+
+@mixin flex ($just, $align) {
+    display: flex;
+    justify-content: $just;
+    align-items: $align;
+}
+
+@mixin background ($url,$height) {
+    background-size: cover;
+    // background: no-repeat;
+    background-image: url($url);
+    background-position: center 30%;
+    min-height: $height;
+}
+
+@mixin layOut {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(51, 51, 51, 0.450);
+}
+
+@mixin sectionPadding($top, $bottom) {
+    padding-top: $top;
+    padding-bottom: $bottom;
+}
+
+//======================================== Header ==================================
+header.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    .nav {
+        @include flex (space-between, center);
+        padding: 1rem;
+        min-height: 8vh;
+        .logo {
+            > h2 {
+                color: $colorWhite;
+                text-transform: capitalize;
+                letter-spacing: 1px;
+            }
+        }
+        ul.list {
+            > li > a {
+                color: $colorWhite;
+                text-transform: capitalize;
+                letter-spacing: .1rem;
+                transition: $mainTransition;
+            }
+        }    
+    }
+}
+// ====================================== Main ====================================
+.main {
+    // ============================== Landing =====================================
+    .landing {
+        background: url('../images/Orange-2.jpg') center center no-repeat;
+        background-size: cover;
+        min-height: 100vh;
+        .lay-out {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(51, 51, 51, 0.301);
+            top: 0;
+            left: 0;
+        }
+        .title-landing {
+            @include flex(center, center);
+            min-height: 100vh;
+            color: $colorWhite;
+            font-size: 2rem;
+            letter-spacing: .3rem;
+            text-transform: uppercase;
+        }
+    }
+    // =============================== About =====================================
+    .about {
+        .content-about {
+            .box {
+                > div {
+                    @include flex(center, center);
+                    flex-direction: column;
+                    min-height: 50vh;
+                    padding: 1rem;
+                    h2 {
+                        letter-spacing: 1px;
+                        text-transform: capitalize;
+                        text-align: center;
+                    }
+                    p {
+                        color: $colorP;
+                        margin: 1rem;
+                        line-height: 1.6;
+                    }
+                    .btn-box {
+                        display: block;
+                        text-transform: uppercase;
+                        font-size: 1rem;
+                        letter-spacing: 1px;
+                        border: 1px solid $colorLinks;
+                        padding: .5rem .8rem;
+                        margin: 1rem 0;
+                        color: #333;
+                        position: relative;
+                        z-index: 10;
+                        transition: $mainTransition;
+                        overflow-x: hidden;
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: -140px;
+                            width: 100%;
+                            height: 100%;
+                            background-color: $colorLinks;
+                            transition: $mainTransition;
+                            z-index: -1;
+                        }
+                        &:hover::before {
+                            left: 0;
+                        }
+                        &:hover { color: $colorWhite;}
+                    }
+                }
+            }
+            .box:nth-of-type(2) {
+                @include background('../images/mobile/image-stand-out2.jpg', 50vh);
+            }
+            .box:nth-of-type(3) {
+                @include background('../images/mobile/image-transform2.jpg', 50vh);
+            }
+            .box:nth-of-type(5) {
+                @include background('../images/mobile/image-graphic-design2.jpg', 50vh);
+            }
+            .box:nth-of-type(6) {
+                @include background('../images/mobile/image-photography2.jpg', 50vh)
+            }
+            // Grouping
+            .box:nth-of-type(5), .box:nth-of-type(6) {
+                position: relative;
+                z-index: 20;
+                &::before {
+                    @include layOut();
+                    z-index: -1;
+                }
+            }
+        }
+    }
+    // ============================= Testimonials =================================
+    .testimonials {
+        @include sectionPadding(2rem, 2rem);
+        > .title-testimonials {
+            text-align: center;
+            margin: 1.5rem 0;
+            text-transform: capitalize;
+            color: #999797;
+        }
+        .content-testimonials {
+            @include sectionPadding(3rem, 1rem);
+
+            .box {
+                box-shadow: 0 0 10px 5px rgba(51, 51, 51, 0.201);
+                padding: 1rem;
+                .info {
+                    text-align: center;
+                    img {
+                        border-radius: 50%;
+                        display: block;
+                        margin: 0 auto 1rem;
+                        width: 100px;
+                    }
+                    p {
+                        margin: 1.5rem 0;
+                        line-height: 1.5;
+                        color: $colorSecond;
+                    }
+                    .description {
+                        padding: .6rem;
+                        h5 {
+                            font-weight: 800;
+                            font-size: 1rem;
+                            color: $colorSecond;
+                        }
+                        span {
+                            display: block;
+                            margin-top: .4rem;
+                            font-size: .85rem;
+                            font-weight: 500;
+                            color: #999797;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // ============================ Gallery ======================================
+    .gallery {
+        @include sectionPadding(2rem, .5rem);
+        .content-gallery {
+            .box {
+                overflow: hidden;
+                img {
+                    overflow: hidden;
+                    width: 100%;
+                    transition: $mainTransition;
+                    cursor: pointer;
+                    &:hover {
+                        transform: rotate(3deg) scale(1.2);
+                    }
+                }
+            }
+        }
+    }
+    // ========================== Footer =======================================
+    .footer {
+        background-color: $lightGreen;
+        padding: 2rem 1rem .5rem;
+        .content-foot {
+            @include grid(1fr, repeat(3, 1fr));
+            place-content: center;
+            place-items: center;
+            row-gap: 1rem;
+            text-transform: capitalize;
+            color: $colorSecond;
+            .title-foot {
+                letter-spacing: 1.5px;
+                font-weight: 800;
+                font-size: 1.8rem;
+            }
+            .list-foot {
+                @include flex(center, center);
+                column-gap: 2rem;
+                font-size: 1.2rem;
+                > li > a {
+                    color: $colorSecond;
+                    font-weight: 600;
+                    transition: $mainTransition;
+                    position: relative;
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        bottom: -.5rem;
+                        left: 0;
+                        width: 0;
+                        height: 8%;
+                        background-color: $colorSecond;
+                        transition: $mainTransition;
+                    }
+                    &:hover::before {
+                        width: 100%;
+                    }
+                    &:hover {
+                        color: $colorWhite;
+                    }
+                }
+            }
+            .icons-foot {
+                @include flex(center, center);
+                column-gap: 2rem;
+                li > i {
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    transition: $mainTransition;
+                    &:hover {
+                        color: $colorWhite;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// =============================== Media Queries ============================================
+        // Small Screen 
+@media screen and (max-width: 370px){
+    // ================================= Nav && Icons && Title Landing ============ 
+    .close-icon { right: .4rem !important;}
+    .logo > h2 { font-size: .9rem !important;}
+    .title-landing { 
+        font-size: 1.2rem !important; 
+        line-height: 2; 
+        text-align: center;
+    }
+    // ================================= Nav && Icons && Title Landing ============ 
+    // ========================= Testimonials ====================================
+    .testimonials {
+        .title-testimonials {
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: .5px;
+        }
+    }
+    // ============================ Footer ======================================
+    .footer {
+        .content-foot {
+            grid-template-rows: .5fr repeat(2, 1fr) !important;
+            .title-foot {
+                font-size: 1rem !important;
+            }
+            .list-foot, .icons-foot {
+                flex-direction: column;
+                row-gap: .6rem;
+                margin-bottom: .5rem;
+            }
+        }
+    }
+} 
+
+@media screen and (max-width: 767px) {
+    // For Icons Open And Close  
+    .icons {
+        color: $colorWhite;
+        font-size: 2rem;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .close-icon {
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+    }
+
+    // ================= Nav =================================
+    .nav {
+        ul.list {
+            position: absolute;
+            left: 0;
+            top: -220px;
+            background-color: #9B8575;
+            width: 100%;
+            padding: 2rem;
+            transition: $mainTransition;
+            li > a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin-top: 1rem;
+                &:hover {
+                    padding-right: 1.1rem;
+                }
+            }
+        }
+    }
+    // =================== About =============================
+    .about {
+        .content-about {
+            @include grid(1fr, repeat(6, 1fr));
+            div {
+                text-align: center;
+                h2 {
+                    font-size: 1.2rem;
+                }
+                p {
+                    font-size: 1rem;
+                }
+                .para-box { 
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+    // ================== Testimonials ==============
+    .testimonials {
+        .title-testimonials {
+            letter-spacing: 1px;
+        }
+        .content-testimonials {
+                @include grid(.6fr, repeat(3, 1fr));
+                row-gap: 1rem;
+                place-content: center;
+        }
+    }
+    // ================= Gallery ===================
+    .gallery {
+            .content-gallery {
+                @include grid(repeat(2, 1fr), repeat(2, 1fr));
+                gap: 1rem;
+            }
+    }
+}
+// =================================================== End Small Screen =============================
+
+// Medium Screen 
+@media screen and (min-width: 768px) {
+    // For Icons Open And Close 
+    .icons { display: none};
+    .nav {
+        ul.list {
+            @include flex (center,center);
+            column-gap: 2rem;
+            > li > a {
+                font-size: 1.1rem;
+                &:hover { 
+                    padding: .5rem .7rem;
+                    border: 1px solid $colorLinks;
+                    border-radius: .65rem;
+                    background-color: $colorLinks;
+                    color: $colorWhite;
+                    font-weight: bold;
+                }
+            }
+        }  
+    }
+    // ================ About ==================
+    .about {
+        .content-about {
+            @include grid(repeat(2, 1fr),repeat(3, 1fr) );
+            place-content: center;
+            div {
+                h2 {
+                    font-size: 1.4rem;
+                    color: #fff;
+                }
+                p {
+                    font-size: 1.2rem;
+                }
+                .para-box { 
+                    font-size: 1.25rem;
+                }
+            }
+        }
+    }
+
+    // ================== Testimonials ==============
+    .testimonials {
+        .title-testimonials {
+            letter-spacing: 2px;
+            font-size: 1.8rem;
+        }
+        .content-testimonials {
+            @include grid(repeat(auto-fit, minmax(150px, 1fr)), 1fr);
+            column-gap: 1rem;
+            .box {
+                cursor: pointer;
+                transition: $mainTransition;
+                &:hover {
+                    transform: translateY(-10px);
+                }
+            }
+        }
+    }
+    // ================= Gallery ===================
+    .gallery {
+        .content-gallery {
+            @include grid(repeat(auto-fit, minmax(150px, 1fr)), 1fr);
+            column-gap: 1rem;
+        }
+    }
+}
